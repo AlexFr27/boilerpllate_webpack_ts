@@ -1,0 +1,209 @@
+@import "vars";
+
+$max-sm-breakpoint: 320;
+$max-lg-breakpoint: 320;
+
+// Это может быть одна из переменных точки останова медиа запроса
+$small-screen: "(max-width: #{$max-sm-breakpoint}px)";
+$wide-screen: "(max-width: #{$max-lg-breakpoint}px)";
+
+/* Функция делит значение пикселя, через $target, которое мы передаем, на контекст 1%, а затем преобразует его в vw */
+@function get-vw-size($target) {
+  @if $target == null {
+    @return null;
+  }
+
+  $vw-context: ($max-lg-breakpoint * 0.01) * 1px;
+  @return ($target/$vw-context) * 1vw;
+}
+
+@mixin vw-font-size($size) {
+  font-size: get-vw-size($size);
+
+  //@media #{$small-screen} {
+  //  font-size: 13px;
+  //}
+}
+
+@mixin vw-indent($type, $top, $right, $bottom, $left) {
+  @if $type == padding {
+    padding-top: get-vw-size($top);
+    padding-right: get-vw-size($right);
+    padding-bottom: get-vw-size($bottom);
+    padding-left: get-vw-size($left);
+  } @else {
+    margin-top: get-vw-size($top);
+    margin-right: get-vw-size($right);
+    margin-bottom: get-vw-size($bottom);
+    margin-left: get-vw-size($left);
+  }
+}
+
+@mixin vw-size($type, $size) {
+  @if $type == width {
+    width: get-vw-size($size);
+  } @else {
+    height: get-vw-size($size);
+  }
+}
+
+//-fonts-//
+@mixin DinProBold {
+  font-family: "DIN Pro Condensed Bold", sans-serif;
+  font-style: normal;
+}
+
+@mixin DinProMedium {
+  font-family: "DIN Pro Condensed Medium", sans-serif;
+  font-style: normal;
+}
+
+@mixin DinProBoldItalic {
+  font-family: "DIN Pro Condensed Bold Italic", sans-serif;
+}
+
+@mixin DinProItalic {
+  font-family: "DIN Pro Condensed Italic", sans-serif;
+  font-weight: 500;
+}
+
+@mixin SFCompactDisplayRegular {
+  font-family: "SF Compact Display";
+  font-style: normal;
+}
+
+//-text-//
+@mixin Text-Set {
+  text-transform: uppercase;
+  color: $black-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+//-media queries-//
+
+@mixin from-320-to-1023 {
+  @media screen and (min-width: 320px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin from-320-to-1023_landscape {
+  @media screen and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin from-1024-to-1279 {
+  @media screen and (min-width: 1023px) and (max-width: 1200px) {
+    @content;
+  }
+}
+@mixin from-1280-to-1365 {
+  @media screen and (min-width: 1200px) and (max-width: 1365px) {
+    @content;
+  }
+}
+@mixin from-1366-to-1439 {
+  @media screen and (min-width: 1366px) and (max-width: 1439px) {
+    @content;
+  }
+}
+
+//-other media queries-//
+@mixin from-1200-to-1279 {
+  @media screen and (min-width: 1200px) and (max-width: 1279px) {
+    @content;
+  }
+}
+
+//-root-//
+.container {
+  // width: 1440px;
+  width: 1920px;
+  margin: 0 auto;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 60px;
+
+  @include from-320-to-1023 {
+    padding: 0 get-vw-size(20px);
+  }
+}
+
+@mixin h88b {
+  @include DinProBold;
+  font-size: 88px;
+  line-height: 100%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: $black-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+@mixin h85bi {
+  @include DinProBoldItalic;
+  font-size: 85px;
+  line-height: 94%;
+  color: $black-color;
+  box-sizing: border-box;
+}
+@mixin h40m {
+  @include DinProMedium;
+  font-size: 40px;
+  line-height: 34px;
+  text-transform: uppercase;
+  color: $dark-grey-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+@mixin h36b {
+  @include DinProBold;
+  font-size: 36px;
+  line-height: 43px;
+  text-transform: uppercase;
+  color: $black-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+@mixin h32b {
+  @include DinProBold;
+  font-size: 32px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: $black-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+@mixin h28b {
+  @include DinProBold;
+  font-size: 28px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: $black-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+@mixin h24m {
+  @include DinProMedium;
+  font-size: 24px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: $black-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+@mixin h18b {
+  @include DinProBold;
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: $black-color;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+@mixin date {
+  float: right;
+  width: 100px;
+}
